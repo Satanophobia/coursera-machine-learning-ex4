@@ -61,25 +61,14 @@ Theta2_grad = zeros(size(Theta2));
 %               the regularization separately and then add them to Theta1_grad
 %               and Theta2_grad from Part 2.
 %
-X = [ones(size(X, 1), 1) X];
-J = sigmoid(sigmoid(Theta1 * X));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+tmp = [ones(size(X, 1), 1) X] * Theta1';
+tmp = sigmoid(tmp);
+tmp = [ones(size(tmp, 1), 1) tmp] * Theta2';
+tmp = sigmoid(tmp);
+n = size(tmp, 2);
+y2 = zeros(m, n);
+y2(sub2ind(size(y2), (1:length(y))', y)) = 1;
+J = sum(sum(-y2 .* log(tmp) - (1 - y2) .* log(1 - tmp), 2)) / m;
 % -------------------------------------------------------------
 
 % =========================================================================
