@@ -1,5 +1,3 @@
-% kiaSTRYGiGHG1BRg
-
 function submit()
   addpath('./lib');
 
