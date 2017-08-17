@@ -75,13 +75,12 @@ J = J + (lambda / (2 * m)) * (sum(sum((Theta1 .* Theta1) , 2)) + ...
 % =========================================================================
 for t = 1:m
     a_1 = X(t, :);
-    z_2 = [1 a_1] * Theta1';
+    z_2 = Theta1 * [1 a_1]';
     a_2 = sigmoid(z_2);
-    z_3 = [ones(size(a_2, 1), 1) a_2] * Theta2';
+    z_3 = Theta2 * [1; a_2];
     a_3 = sigmoid(z_3);
-    delta_3 = a_3 - y2(t, :);
-    delta_3 = delta_3';
-    delta_2 = Theta2' * delta_3 .* gradientSigmoid(z_2);
+    delta_3 = a_3 - y2(t, :)';
+    delta_2 = Theta2' * delta_3 .* sigmoidGradient(z_2); %editing
 % Unroll gradients
 grad = [Theta1_grad(:) ; Theta2_grad(:)];
 
