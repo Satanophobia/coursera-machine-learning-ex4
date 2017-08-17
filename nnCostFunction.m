@@ -70,7 +70,9 @@ y2 = zeros(m, n);
 y2(sub2ind(size(y2), (1:length(y))', y)) = 1;
 J = sum(sum(-y2 .* log(tmp) - (1 - y2) .* log(1 - tmp), 2)) / m;
 % -------------------------------------------------------------
-
+Theta1(:, 1) = 0;
+Theta2(:, 1) = 0;
+J = J + (lambda / (2 * m)) * (sum(sum((Theta1 .* Theta1) , 2)) + sum(sum((Theta2 .* Theta2) , 2)));
 % =========================================================================
 
 % Unroll gradients
